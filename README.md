@@ -116,9 +116,7 @@ This folder covers **Logistic Regression**, a widely-used classification algorit
 * **How the Algorithm Works**  
   1. **Sigmoid Function**: Converts the linear combination of features \(\beta_0 + \beta_1 x_1 + \dots\) into a probability between 0 and 1.  
   2. **Cost Function**: Uses **Cross-Entropy Loss (Log Loss)** instead of MSE:
-     $
-     \text{Cost} = -\frac{1}{N} \sum_{i=1}^{N} [y_i \log(\hat{p_i}) + (1 - y_i) \log(1 - \hat{p_i})].
-     $
+     $\text{Cost} = -\frac{1}{N} \sum_{i=1}^{N} [y_i \log(\hat{p_i}) + (1 - y_i) \log(1 - \hat{p_i})].$
   3. **Optimization**: Adjust \(\beta\) via Gradient Descent (or similar methods) to minimize the logistic loss.
 
 * **How the Algorithm Makes Predictions**  
