@@ -44,13 +44,15 @@ This folder introduces three fundamental regression algorithms:**Linear Regressi
   Linear Regression models the relationship between a scalar response (dependent variable) and one or more explanatory variables (independent variables) by fitting a linear equation to observed data.
 
 * **How the Algorithm Works**  
-  1. **Model Representation**: \( y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n \).  
+  1. **Model Representation**  
+     $\( y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n \)$ 
   2. **Cost Function**: Typically uses **Mean Squared Error (MSE)** to measure how well the line fits the data.  
   3. **Optimization**: Adjust the coefficients \(\beta\) to minimize the MSE (often through **Gradient Descent** or other optimization methods).
 
 * **How the Algorithm Makes Predictions**  
-  1. **Plug-In Values**: Given new input features \((x_1, x_2, \dots, x_n)\), compute \( \hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n \).  
-  2. **Output**: The scalar value \(\hat{y}\) is the predicted target value.
+  1. **Plug in Values**  
+     Given new input features $\((x1, x2, ..., xn)\)$, compute the prediction $\( \hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n \)$.
+  2. **Output**: The scalar value $\(\hat{y}\)$ is the predicted target value.
 
 * **Some Analysis**  
   - **Advantages**: Simple to implement and interpret; works well when data has a linear relationship.  
@@ -60,21 +62,19 @@ This folder introduces three fundamental regression algorithms:**Linear Regressi
 
 ### Ridge Regression
 * **Key Idea**  
-  Ridge Regression is a variant of Linear Regression that adds an \(L2\) penalty to the cost function to shrink coefficient values and reduce overfitting.
+  Ridge Regression is a variant of Linear Regression that adds an $\(L2\)$ penalty to the cost function to shrink coefficient values and reduce overfitting.
 
 * **How the Algorithm Works**  
   1. **Cost Function with \(L2\) Regularization**:  
-     \[
-     \text{Cost} = \text{MSE} + \lambda \sum_{j=1}^{n} \beta_j^2
-     \]
-     where \(\lambda\) controls the strength of regularization.  
+     $\text{Cost} = \text{MSE} + \lambda \sum_{j=1}^{n} \beta_j^2$
+     where $\(\lambda\)$ controls the strength of regularization.  
   2. **Optimization**: Similar to Linear Regression, but includes the additional penalty term on the coefficients.  
-  3. **Coefficient Shrinkage**: Larger \(\lambda\) values produce smaller (but never zero) coefficients, thereby reducing variance in the model.
+  3. **Coefficient Shrinkage**: Larger $\(\lambda\)$ values produce smaller (but never zero) coefficients, thereby reducing variance in the model.
 
 * **How the Algorithm Makes Predictions**  
-  1. **Use the Learned Coefficients**: After fitting, the model produces coefficients \(\beta_j\).  
+  1. **Use the Learned Coefficients**: After fitting, the model produces coefficients $\(\beta_j\)$.  
   2. **Compute Predicted Value**: Same linear equation as standard Linear Regression:  
-     \(\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n.\)
+     $\(\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n.\)$
 
 * **Some Analysis**  
   - **Advantages**: Reduces model complexity and collinearity among features; helps prevent overfitting.  
@@ -88,20 +88,18 @@ This folder introduces three fundamental regression algorithms:**Linear Regressi
 
 * **How the Algorithm Works**  
   1. **Cost Function with \(L1\) Regularization**:  
-     \[
-     \text{Cost} = \text{MSE} + \lambda \sum_{j=1}^{n} |\beta_j|
-     \]
-  2. **Optimization**: Adjust \(\beta_j\) to minimize the cost function, where \(\lambda\) controls the level of regularization.  
+     $\text{Cost} = \text{MSE} + \lambda \sum_{j=1}^{n} |\beta_j|$
+  2. **Optimization**: Adjust $\(\beta_j\)$ to minimize the cost function, where $\(\lambda\)$ controls the level of regularization.  
   3. **Coefficient Sparsity**: Under sufficient regularization, some coefficients will become zero, effectively performing feature selection.
 
 * **How the Algorithm Makes Predictions**  
-  1. **Learned Sparse Coefficients**: After training, some \(\beta_j\) may be zero.  
+  1. **Learned Sparse Coefficients**: After training, some $\(\beta_j\)$ may be zero.  
   2. **Compute Predicted Value**: Use the non-zero coefficients in the linear function:
-     \(\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n.\)
+     $\(\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n.\)$
 
 * **Some Analysis**  
   - **Advantages**: Can perform feature selection by driving some coefficients to zero; helpful when many features are irrelevant.  
-  - **Disadvantages**: Can suffer from high bias if \(\lambda\) is too large; not always stable if features are highly correlated.
+  - **Disadvantages**: Can suffer from high bias if $\(\lambda\)$ is too large; not always stable if features are highly correlated.
 
 ---
 
@@ -112,21 +110,20 @@ This folder covers **Logistic Regression**, a widely-used classification algorit
 ### Logistic Regression
 * **Key Idea**  
   Logistic Regression models the probability that a given input belongs to a certain class (often binary), using the logistic (sigmoid) function:
-  \[
-  P(y=1 | x) = \frac{1}{1 + e^{-z}}, \quad z = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n.
-  \]
+  $P(y=1 | x) = \frac{1}{1 + e^{-z}}, \quad z = \beta_0 + \beta_1 x_1 + \dots + \beta_n x_n$.
+  
 
 * **How the Algorithm Works**  
   1. **Sigmoid Function**: Converts the linear combination of features \(\beta_0 + \beta_1 x_1 + \dots\) into a probability between 0 and 1.  
   2. **Cost Function**: Uses **Cross-Entropy Loss (Log Loss)** instead of MSE:
-     \[
+     $
      \text{Cost} = -\frac{1}{N} \sum_{i=1}^{N} [y_i \log(\hat{p_i}) + (1 - y_i) \log(1 - \hat{p_i})].
-     \]
+     $
   3. **Optimization**: Adjust \(\beta\) via Gradient Descent (or similar methods) to minimize the logistic loss.
 
 * **How the Algorithm Makes Predictions**  
-  1. **Probability Thresholding**: For a new input \(x\), compute \(P(y=1 | x)\).  
-  2. **Classification**: If \(P(y=1 | x) \geq 0.5\), predict class 1; otherwise, predict class 0.
+  1. **Probability Thresholding**: For a new input $\(x\)$, compute $\(P(y=1 | x)\)$.  
+  2. **Classification**: If $\(P(y=1 | x) \geq 0.5\)$, predict class 1; otherwise, predict class 0.
 
 * **Some Analysis**  
   - **Advantages**: Outputs well-calibrated probabilities; easy to interpret; extends to multiclass problems (e.g., One-vs-Rest).  
@@ -168,7 +165,7 @@ This folder introduces two powerful ensemble methods:
 * **How the Algorithm Works**  
   1. **Initial Model**: Start with a simple model (often a constant prediction).  
   2. **Sequential Boosting**: Iteratively fit new decision trees to the negative gradient (residual errors) of the loss function.  
-  3. **Update Ensemble**: Add each new tree’s output to the overall model, weighted by a learning rate \(\eta\).
+  3. **Update Ensemble**: Add each new tree’s output to the overall model, weighted by a learning rate $\(\eta\)$.
 
 * **How the Algorithm Makes Predictions**  
   1. **Summation of Tree Outputs**: For a new data point, each tree in the sequence provides a prediction.  
@@ -182,8 +179,8 @@ This folder introduces two powerful ensemble methods:
   - **Disadvantages**: More sensitive to hyperparameters (learning rate, number of trees, tree depth, etc.); can overfit without careful tuning.
 
 ## Competition - Image Classification Task (CNN(ResNet), ViT)
-**Primary task:** Image Classification
-**Data: ** We offer a dataset with 3600 images (3200 images for training/validation, and 400 images for testing). The images are of size 512⨉512, but you are free to choose the resolution for model training. In particular, among the 3600 images, there are 900 AI-generated images. The full set of classes is as follows:
+**Primary task:** Image Classification </br>
+**Data:** We offer a dataset with 3600 images (3200 images for training/validation, and 400 images for testing). The images are of size 512⨉512, but you are free to choose the resolution for model training. In particular, among the 3600 images, there are 900 AI-generated images. The full set of classes is as follows:
 {0: Tang(唐), 1: Song(宋), 2: Yuan(元),
 3: Ming(明), 4: Qing(清), 5: AI}
 You have access to the class labels on the training/validation set, and your task is to train a model to make class label predictions on the test set. Noticing that the labels on the training/validation set are designed to be noisy, where only half the AI-generated images are labelled explicitly, whereas the rest of them have been assigned to some random labels (i.e., one of the five non-AI classes). Hence, you may consider training a dedicated model for data cleaning first.
